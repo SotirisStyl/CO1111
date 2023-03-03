@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About.html</title>
+    <link rel="stylesheet" href="aboutdes.css">
+</head>
+<body>
+
+<main class="main">
+
+
+    <a href="index.html" class="back">Back</a>
+    <h5 class="team">Team 5</h5>
+    <div class="clearFloat"></div>
+
+
+    <div id="main">
+        <div class="about">About</div>
+    </div>
+
+
+    <div class="box" onclick="openBox1()">
+        <p class="text">Sotiris Stylianou</p>
+    </div>
+    <div id="detailsBox1" style="display: none">
+        <p style="color: white;">This is Sotiris..........</p>
+    </div>
+
+    <div class="box" onclick="openBox2()">
+        <p class="text">Alexandros Neophytou</p>
+    </div>
+    <div id="detailsBox2" style="display: none">
+        <p style="color: white;">This is Alexandros..........</p>
+    </div>
+
+    <div class="box" onclick="openBox3()">
+        <p class="text">Antreas Efthymiou</p>
+    </div>
+
+    <div id="detailsBox3" style="display: none">
+        <p style="color: white;">This is Antreas..........</p>
+
+    </div>
+</main>
+
+<script>
+    function openBox1() {
+        const detailsBox1 = document.getElementById("detailsBox1");
+        if (detailsBox1.style.display === "none") {
+            detailsBox1.style.display = "block";
+        } else {
+            detailsBox1.style.display = "none";
+        }
+    }
+
+    function openBox2() {
+        const detailsBox2 = document.getElementById("detailsBox2");
+        if (detailsBox2.style.display === "none") {
+            detailsBox2.style.display = "block";
+        } else {
+            detailsBox2.style.display = "none";
+        }
+    }
+    function openBox3() {
+        const detailsBox3 = document.getElementById("detailsBox3");
+        if (detailsBox3.style.display === "none") {
+            detailsBox3.style.display = "block";
+        } else {
+            detailsBox3.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>

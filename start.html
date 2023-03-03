@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    //Read the parameter from the challenge page (treasure hunt id):
+    let treasureHuntID = null;
+    const params = new URLSearchParams(location.search);
+    if (params.has("uuid")) {
+        treasureHuntID = params.get("uuid");
+    }
+    console.log(treasureHuntID);
+</script>
+
+<form>
+  <label for="fname">Username</label><br>
+  <input type="text" id="fname" name="fname"><br>
+    <input type="button" value="Start" onclick="startTreasureHunt()">
+</form>
+
+
+<script>
+    const appName = "Team-5";
+    function startTreasureHunt() {
+        //Read input to get player name
+
+        //Validate it (not empty, no invalid values etc)
+
+        //Start the game:
+        fetch(...)
+    }
+</script>
+
+</body>
+</html>
