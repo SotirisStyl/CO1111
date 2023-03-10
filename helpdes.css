@@ -13,15 +13,15 @@ body {
 .main {
     background-size: 600% 600%;
     background-color: black;
-    height: 1900px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    height: 1870px;
+    padding-top:10px;
 }
 
 #main {
     margin-top: 40px;
     background: black;
     border: 1px solid red;
+    width: 100%;
     height: 210px;
     border-bottom-right-radius: 43%;
     border-bottom-left-radius: 43%;
@@ -38,6 +38,7 @@ body {
 .back {
     margin-right: 5px;
     color: #FFFF00;
+    margin-top: 0;
     float: right;
     padding: 5px;
     border: 1px solid black;
