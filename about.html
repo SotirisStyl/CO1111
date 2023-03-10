@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About.html</title>
+    <link rel="stylesheet" href="aboutdes.css">
+</head>
+<body>
+
+<main class="main">
+
+
+    <a href="index.html" class="back">Back</a>
+    <h5 class="team">Team 5</h5>
+    <div class="clearFloat"></div>
+
+
+    <div id="main">
+        <div class="about">About</div>
+    </div>
+
+    <p><a  href="https://twitter.com/TheHunters_2?t=bg8MBJZY_SD9Red0OPMQ1g&s=09">
+        <img id="Twitter" src="directory/Twitter.png" alt="Twitter" >
+    </a></p>
+
+    <p><a  href="https://www.instagram.com/thetreasurehunters2/">
+        <img id="Instagram" src="directory/instagram.png" alt="Instagram" >
+    </a></p>
+
+    <p><a  href="https://www.tiktok.com/@thetreasurehunters2?lang=en">
+        <img id="TikTok" src="directory/TikTok.png" alt="TikTok" >
+    </a></p>
+
+
+    <div class="box" onclick="openBox1()">
+        <p class="text">Sotiris Stylianou</p>
+    </div>
+    <div id="detailsBox1" style="display: none">
+        <p style="color: white;">- Created the home page</p>
+        <p style="color: white;">- Managed the github. </p>
+    </div>
+
+
+    <div class="box" onclick="openBox2()">
+        <p class="text">Alexandros Neophytou</p>
+    </div>
+    <div id="detailsBox2" style="display: none">
+        <p style="color: white;">- Created the video in the home page. </p>
+        <p style="color: white;">- Created the about page. </p>
+    </div>
+
+
+    <div class="box" onclick="openBox3()">
+        <p class="text">Antreas Efthymiou</p>
+    </div>
+    <div id="detailsBox3" style="display: none">
+        <p style="color: white;">- Created the video in the home page.</p>
+        <p style="color: white;">- Managed all the social media. </p>
+    </div>
+
+    <div class="box" id="detailsBox4" >
+        <p id="text1">Information</p>
+        <p id="text2">The treasure hunt app is widely available on all smartphones and mobile devices that have a current,
+            HTML5-compatible web browser. The application's main purpose is to persuade younger users to play individually
+            or in groups to gain points. The online software is designed to be appealing and accessible to all users,
+            encouraging them to play in groups. Because the Treasure Hunt is made up of several forms of questions,
+            each user will have the opportunity to complete the entire session. Correct answers will gain points,
+            while incorrect responses will cost points.In addition to answering the question correctly,
+            players must be at roughly the proper area because certain questions require location access.
+            As a consequence, scores will be shown on the scoreboard page to illustrate player rankings.</p>
+        <p id="text3">To present our app and encourage viewers to try the game, we rely primarily on social media channels
+            such as Instagram, Twitter, and TikTok, which are the most popular. We would appreciate it if you
+            will join our family and help us in this way. Further information about our social media platforms
+            may be found at the top of the page.</p>
+    </div>
+
+</main>
+
+<script>
+    function openBox1() {
+        const detailsBox1 = document.getElementById("detailsBox1");
+        if (detailsBox1.style.display === "none") {
+            detailsBox1.style.display = "block";
+        } else {
+            detailsBox1.style.display = "none";
+        }
+    }
+
+    function openBox2() {
+        const detailsBox2 = document.getElementById("detailsBox2");
+        if (detailsBox2.style.display === "none") {
+            detailsBox2.style.display = "block";
+        } else {
+            detailsBox2.style.display = "none";
+        }
+    }
+    function openBox3() {
+        const detailsBox3 = document.getElementById("detailsBox3");
+        if (detailsBox3.style.display === "none") {
+            detailsBox3.style.display = "block";
+        } else {
+            detailsBox3.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>

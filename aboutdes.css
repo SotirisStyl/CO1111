@@ -1,0 +1,129 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 374px;
+    height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+.main {
+    background-size: 600% 600%;
+    background-color: black;
+    height: 1200px;
+}
+
+#main {
+    margin-top: 10px;
+    background: black;
+    border: 1px solid red;
+    width: 100%;
+    height: 265px;
+    border-bottom-right-radius: 43%;
+    border-bottom-left-radius: 43%;
+}
+.team {
+    float: left;
+    color: #FFFF00;
+    margin-top: 5px;
+    padding: 5px;
+    border: 1px solid black;
+    background-color: #1F51FF;
+    border-radius: 10px;
+}
+.back {
+    color: #FFFF00;
+    margin-top: 5px;
+    float: right;
+    padding: 5px;
+    border: 1px solid black;
+    background-color: #1F51FF;
+    border-radius: 10px;
+}
+.about{
+    font-size: 2.5em;
+    margin-left: 135px;
+    margin-top:  10px;
+    color: #FFFF00;
+    text-decoration: underline;
+}
+.box {
+    width:300px;
+    height: 50px;
+    margin-top: 10px;
+    margin-left: 35px;
+    border: 2px solid black;
+    background-color: #1F51FF;
+    border-radius: 10px;
+}
+.box .text{
+    color:#FFFF00;
+    text-align: center;
+    margin-top: 15px;
+}
+.clearFloat {
+    float: none;
+    clear: both;
+}
+#detailsBox1{
+    margin-left:40px;
+}
+#detailsBox2{
+    margin-left:40px;
+}
+#detailsBox3{
+    margin-left:40px;
+}
+#detailsBox4{
+    width:300px;
+    height: 605px;
+    margin-top: 10px;
+    margin-left: 35px;
+    padding-bottom: 10px;
+    border: 2px solid black;
+    background-color: #1F51FF;
+    border-radius: 10px;
+}
+#text1{
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1.5em;
+    color: #FFFF00;
+    text-decoration: underline;
+}
+#text2{
+    text-align: center;
+    color: white;
+    margin-left: 5px;
+    margin-top: 10px;
+}
+#text3{
+    text-align: center;
+    color: white;
+    margin-left: 5px;
+}
+#Twitter{
+    position: absolute;
+    width:80px;
+    height:80px;
+    margin-left: 40px;
+    margin-top: -160px;
+}
+#Instagram{
+    position: absolute;
+    width:85px;
+    height:85px;
+    margin-left: 150px;
+    margin-top: -160px;
+}
+#TikTok{
+    position: absolute;
+    width:85px;
+    height:85px;
+    margin-left: 260px;
+    margin-top: -160px;
+}

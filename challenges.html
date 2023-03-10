@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Challenges</title>
+</head>
+<body>
+<h1>Challenges</h1>
+<ul id="challenges"></ul>
+
+<script>
+    let challengesList = document.getElementById("challenges");
+    fetch("https://codecyprus.org/th/api/list")
+        .then(response => response.json()) //Parse JSON text to JavaScript object
+        .then(jsonObject => {
+            console.log(jsonObject); //TODO - Success, do something with the data.
+            let treasureHunts = jsonObject.treasureHunts;
+            for (let i =0; i < treasureHunts.length; i++) {
+                let listItem = document.createElement("li");
+                listItem.innerHTML = "<a href=start.html?uuid=" + treasureHunts[i].uuid + ">" + treasureHunts[i].name + "</a>";
+                challengesList.appendChild(listItem);
+            }
+        });
+</script>
+</body>
+</html>

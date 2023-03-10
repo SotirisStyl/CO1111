@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    //Read the parameter from the challenge page (treasure hunt id):
+    let treasureHuntID = null;
+    const params = new URLSearchParams(location.search);
+    if (params.has("uuid")) {
+        treasureHuntID = params.get("uuid");
+    }
+    console.log(treasureHuntID);
+</script>
+
+<form>
+  <label for="fname">Username</label><br>
+  <input type="text" id="fname" name="fname" required><br>
+    <input type="button" value="Start" onclick="startTreasureHunt()">
+</form>
+
+<ul id="challenges"></ul>
+
+<script>
+    const appName = "Team-5";
+    function startTreasureHunt() {
+        //Read input to get player name
+        let nameField = document.getElementById("fname");
+        let name = nameField.value;
+        //Validate it (not empty, no invalid values etc)
+
+        //Start the game:
+        fetch("https://codecyprus.org/th/api/start?player=" + name + "&app=" + appName + "&treasure-hunt-id=" +  treasureHuntID)
+            .then(response => response.json()) //Parse JSON text to JavaScript object
+            .then(jsonObject => {
+                console.log(jsonObject); //TODO - Success, do something with the data.
+                let session = jsonObject.session;
+                console.log(session);
+                sessionStorage.setItem("session", session);
+            });
+    }
+</script>
+
+</body>
+</html>
