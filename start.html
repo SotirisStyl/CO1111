@@ -17,9 +17,9 @@
 </script>
 
 <form>
-  <label for="fname">Username</label><br>
-  <input type="text" id="fname" name="fname" required><br>
-    <input type="button" value="Start" onclick="startTreasureHunt()">
+    <label for="fname">Username</label><br>
+    <input type="text" id="fname" name="fname" required><br>
+    <input type="button" id="myButton" value="Start" onclick="startTreasureHunt()">
 </form>
 
 <ul id="challenges"></ul>
@@ -30,16 +30,29 @@
         //Read input to get player name
         let nameField = document.getElementById("fname");
         let name = nameField.value;
-        //Validate it (not empty, no invalid values etc)
-
+        //Validate it (not empty, no invalid values, etc.)
+        /* if (name === null){
+            console.log("Empty username");
+         }
+         else {*/
         //Start the game:
         fetch("https://codecyprus.org/th/api/start?player=" + name + "&app=" + appName + "&treasure-hunt-id=" +  treasureHuntID)
             .then(response => response.json()) //Parse JSON text to JavaScript object
             .then(jsonObject => {
-                console.log(jsonObject); //TODO - Success, do something with the data.
+                console.log(jsonObject);
                 let session = jsonObject.session;
-                console.log(session);
                 sessionStorage.setItem("session", session);
+
+                let errorMessages = jsonObject.errorMessages;
+                console.log(errorMessages);
+                if (errorMessages === ('The specified playerName: ' + name + ', is already in use (try a different one).')){
+                    console.log("error");
+                }
+                else {
+                    document.getElementById("myButton").onclick = function () {
+                        location.href = "quiz.html";
+                    };
+                }
             });
     }
 </script>
