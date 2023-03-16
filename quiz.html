@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Treasure Hunt Question</title>
 </head>
 
 <body>
@@ -18,21 +18,38 @@
     const session = sessionStorage.getItem('session');
 
     // Fetch question from API
-    fetch('https://codecyprus.org/th/api/question?session='+session)
-    .then(response => response.json())
+    fetch(`https://codecyprus.org/th/api/question?session=` + session)
+        .then(response => response.json())
         .then(jsonObject => {
             console.log(jsonObject);
             // Display question text
             const questionDiv = document.getElementById('question');
-            questionDiv.innerHTML = <p>${jsonObject.questionText}</p>;
+            questionDiv.innerHTML = `<p>${jsonObject.questionText}</p>`;
 
             // Create answer input based on question type
             const answerInputDiv = document.getElementById('answer-input');
             const inputType = getInputType(jsonObject.questionType);
             answerInputDiv.innerHTML = `<label for="answer">Answer:</label>
-            <input type="${inputType}" id="answer" name="answer" required>` ;
+                <input type="${inputType}" id="answer" name="answer" required>` ;
         })
         .catch(error => console.error(error));
+
+    // Handle form submission
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const answer = document.getElementById('answer').value;
+        // Submit answer to API
+        fetch(`https://codecyprus.org/th/api/answer?session=` + session + `&answer=` + answer)
+            .then(response => response.json())
+            .then(jsonObject => {
+                console.log(jsonObject);
+                // Display result message
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = `<p>${jsonObject.message}</p>`;
+            })
+            .catch(error => console.error(error));
+    });
 
     // Helper function to get input type based on question type
     function getInputType(questionType) {
@@ -53,5 +70,6 @@
     }
 </script>
 
+<div id="result"></div>
 </body>
 </html>
