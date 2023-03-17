@@ -8,37 +8,75 @@
 <body>
 <h1>Treasure Hunt Question</h1>
 <div id="question"></div>
-<form>
-    <div id="answer-input"></div>
-    <button type="submit">Submit Answer</button>
+
+<!-- Update onclick events with correct field references -->
+<form id="textForm" style="display: none">
+    <input type="text" id="textInput">
+    <button type="button" onclick="answerQuestion(textField.value)">Submit Answer</button>
+</form>
+
+<form id="integerForm" style="display: none">
+    <input type="number" id="integerInput">
+    <button type="button" onclick="answerQuestion(integerField.value)">Submit Answer</button>
+</form>
+
+<form id="floatForm" style="display: none">
+    <input type="number" step="0.01" id="floatInput" name="floatInput">
+    <button type="button" onclick="answerQuestion(floatInput.value)">Submit Answer</button>
+</form>
+
+
+<form id="booleanForm" style="display: none">
+    <input type="button" value="True" onclick="answerQuestion('True')" />
+    <input type="button" value="False" onclick="answerQuestion('False')" />
+</form>
+
+<form id="mcqForm" style="display: none">
+    <input type="button" value="A" onclick="answerQuestion('A')" />
+    <input type="button" value="B" onclick="answerQuestion('B')" />
+    <input type="button" value="C" onclick="answerQuestion('C')" />
+    <input type="button" value="D" onclick="answerQuestion('D')" />
 </form>
 
 <script>
     // Get session ID from storage
     const session = sessionStorage.getItem('session');
 
-    // Fetch question from API
-    fetch(`https://codecyprus.org/th/api/question?session=` + session)
-        .then(response => response.json())
-        .then(jsonObject => {
-            console.log(jsonObject);
-            // Display question text
-            const questionDiv = document.getElementById('question');
-            questionDiv.innerHTML = `<p>${jsonObject.questionText}</p>`;
+    //Text Form:
+    const textForm = document.getElementById("textForm");
+    const textField = document.getElementById("textInput");
 
-            // Create answer input based on question type
-            const answerInputDiv = document.getElementById('answer-input');
-            const inputType = getInputType(jsonObject.questionType);
-            answerInputDiv.innerHTML = `<label for="answer">Answer:</label>
-                <input type="${inputType}" id="answer" name="answer" required>` ;
-        })
-        .catch(error => console.error(error));
+    //Boolean form:
+    const booleanForm = document.getElementById("booleanForm");
 
-    // Handle form submission
-    const form = document.querySelector('form');
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
-        const answer = document.getElementById('answer').value;
+    //MCQ form:
+    const mcqForm = document.getElementById("mcqForm");
+
+    //Text Form:
+    const integerForm = document.getElementById("integerForm");
+    const integerField = document.getElementById("IntegerInput");
+
+    //Text Form:
+    const floatForm = document.getElementById("floatForm");
+    const floatField = document.getElementById("floatInput");
+
+    function getQuestion() {
+        // Fetch question from API
+        fetch(`https://codecyprus.org/th/api/question?session=` + session)
+            .then(response => response.json())
+            .then(jsonObject => {
+                console.log(jsonObject);
+                // Display question text
+                const questionDiv = document.getElementById('question');
+                questionDiv.innerHTML = `<p>${jsonObject.questionText}</p>`;
+
+                // Create answer input based on question type
+                showForm(jsonObject.questionType);
+            })
+            .catch(error => console.error(error));
+    }
+
+    function answerQuestion(answer) {
         // Submit answer to API
         fetch(`https://codecyprus.org/th/api/answer?session=` + session + `&answer=` + answer)
             .then(response => response.json())
@@ -47,25 +85,50 @@
                 // Display result message
                 const resultDiv = document.getElementById('result');
                 resultDiv.innerHTML = `<p>${jsonObject.message}</p>`;
+
+                //TODO - Adjust points
+
+                if (!jsonObject.completed) {
+                    getQuestion();
+                }
+                else {
+                    location.href = "scoreboard.html";
+                }
             })
             .catch(error => console.error(error));
-    });
+
+        // Check that the text form and its field exist
+        if (textForm && textField) {
+            textField.value = ""; // Clear the input field
+        }
+    }
+
+    getQuestion();
+
 
     // Helper function to get input type based on question type
-    function getInputType(questionType) {
+    function showForm(questionType) {
+        textForm.style.display = "none";
+        floatForm.style.display = "none";
+        integerForm.style.display = "none;"
+        booleanForm.style.display = "none";
+        mcqForm.style.display = "none";
         switch (questionType) {
             case 'BOOLEAN':
-                return 'checkbox';
+                booleanForm.style.display = "block";
+                break;
             case 'INTEGER':
-                return 'number';
+                integerForm.style.display = "block";
+                break;
             case 'NUMERIC':
-                return 'number';
+                floatForm.style.display = "block";
+                break;
             case 'MCQ':
-                return 'radio';
+                mcqForm.style.display = "block";
+                break;
             case 'TEXT':
-                return 'text';
-            default:
-                return 'text';
+                textForm.style.display = "block";
+                break;
         }
     }
 </script>
