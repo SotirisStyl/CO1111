@@ -1,0 +1,168 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    width: 374px;
+    height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+.main {
+    background-size: 600% 600%;
+    background-color: black;
+    height: 1100px;
+    padding-top:10px;
+}
+
+#main {
+    margin-top: 40px;
+    background: black;
+    border: 1px solid red;
+    width: 100%;
+    height: 150px;
+    border-bottom-right-radius: 43%;
+    border-bottom-left-radius: 43%;
+}
+.team {
+    float: left;
+    color: #FFFF00;
+    margin-left: 5px;
+    padding: 5px;
+    border: 1px solid black;
+    background-color: #1F51FF;
+    border-radius: 10px;
+}
+.back {
+    margin-right: 5px;
+    color: #FFFF00;
+    margin-top: 0;
+    float: right;
+    padding: 5px;
+    border: 1px solid black;
+    background-color: #1F51FF;
+    border-radius: 10px;
+}
+#meet1{
+    margin-top: 10px;
+    margin-left: 75px;
+    color: #1F51FF;
+    text-align: center;
+    width:220px;
+    height:50px;
+    border: 2px solid black;
+    background-color: darkgrey;
+    border-radius: 10px;
+    padding-top: 8px;
+}
+#meet2{
+    margin-top: 10px;
+    margin-left: 75px;
+    color: #1F51FF;
+    text-align: center;
+    width:220px;
+    height:50px;
+    border: 2px solid black;
+    background-color: darkgrey;
+    border-radius: 10px;
+    padding-top: 8px;
+}
+#meet3{
+    margin-top: 10px;
+    margin-left: 75px;
+    color: #1F51FF;
+    text-align: center;
+    width:220px;
+    height:50px;
+    border: 2px solid black;
+    background-color: darkgrey;
+    border-radius: 10px;
+    padding-top: 8px;
+}
+#meet4{
+    margin-top: 10px;
+    margin-left: 75px;
+    color: #1F51FF;
+    text-align: center;
+    width:220px;
+    height:60px;
+    border: 2px solid black;
+    background-color: darkgrey;
+    border-radius: 10px;
+    padding-top: 8px;
+}
+#meet5{
+    margin-top: 10px;
+    margin-left: 75px;
+    color: #1F51FF;
+    text-align: center;
+    width:220px;
+    height:50px;
+    border: 2px solid black;
+    background-color: darkgrey;
+    border-radius: 10px;
+    padding-top: 8px;
+}
+#meet6{
+    margin-top: 10px;
+    margin-left: 75px;
+    color: #1F51FF;
+    text-align: center;
+    width:220px;
+    height:50px;
+    border: 2px solid black;
+    background-color: darkgrey;
+    border-radius: 10px;
+    padding-top: 8px;
+}
+#meet7{
+    margin-top: 10px;
+    margin-left: 75px;
+    color: #1F51FF;
+    text-align: center;
+    width:220px;
+    height:50px;
+    border: 2px solid black;
+    background-color: darkgrey;
+    border-radius: 10px;
+    padding-top: 8px;
+}
+#meet8{
+    margin-top: 10px;
+    margin-left: 75px;
+    color: #1F51FF;
+    text-align: center;
+    width:220px;
+    height:80px;
+    border: 2px solid black;
+    background-color: darkgrey;
+    border-radius: 10px;
+    padding-top: 8px;
+}
+#notes{
+    color: #1F51FF;
+    font-size: 3.0em;
+    text-decoration: underline;
+    margin-left: 115px;
+    margin-top: 30px;
+}
+.team{
+
+}
+.back{
+
+}
+#meet9{
+    margin-top: 10px;
+    margin-left: 75px;
+    color: #1F51FF;
+    text-align: center;
+    width:220px;
+    height:80px;
+    border: 2px solid black;
+    background-color: darkgrey;
+    border-radius: 10px;
+    padding-top: 8px;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Retrieve Treasure Hunts</title>
+</head>
+<body>
+<h1>Treasure Hunts</h1>
+<ul id="treasure-hunts"></ul>
+<script>
+    const apiUrl = "https://codecyprus.org/th/test-api/list";
+    const numberOfTHs = 2; // change this value to request a different number of treasure hunts
+    const treasureHuntsList = document.getElementById("treasure-hunts");
+
+    // make the API call to retrieve treasure hunts
+    fetch(${apiUrl}?number-of-ths=${numberOfTHs})
+        .then(response => response.json())
+        .then(jsonObject => {
+            console.log(jsonObject);
+            let treasureHunts = jsonObject.treasureHunts;
+            for (let i=0; i<treasureHunts.length; i++){
+                let listItem = document.createElement("li");
+                listItem.innerHTML = "<a href=startTest.html?uuid=" + treasureHunts[i].uuid + ">" + treasureHunts[i].name + "</a>";
+                treasureHuntsList.appendChild(listItem);
+            }
+        })
+        .catch(error => console.error(error));
+</script>
+</body>
+</html>
