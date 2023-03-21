@@ -49,10 +49,12 @@ body {
     margin-top: 50px;
 }
 #challenges a{
-    align-self: center;
-    width: 100%;
+    padding-top: 15px;
+    text-align: center;
+    display: block;
+    width: 99%;
     height: 40px;
-    margin-top: 20px;
+    margin-top: 30px;
     border: 1px solid black;
     background-color: #1F51FF;
     border-radius: 10px;
