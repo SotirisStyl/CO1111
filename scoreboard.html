@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<main class="main">
+  <a href="index.html" class="back">Back</a>
+  <h5 class="team">Team 5</h5>
+  <div class="clearFloat"></div>
+
+  <div id="main">
+    <h1 id="chtitle">Leaderboard</h1>
+    <table id="scoreboard">
+      <tr>
+        <th>Rank</th>
+        <th style="margin-left:-55px; display: block">Player</th>
+        <th>Score</th>
+        <th>Completion Time</th>
+      </tr>
+    </table>
+  </div>
+
+</main>
+
+<script>
+  // Get session ID from storage
+  const session = sessionStorage.getItem('session');
+
+  let scoreboardList = document.getElementById("scoreboard").getElementsByTagName('tbody')[0];
+  // Fetch question from API
+  fetch("https://codecyprus.org/th/api/leaderboard?session=" + session + "&sorted&limit=10")
+  .then(response => response.json())
+          .then(jsonObject => {
+            console.log(jsonObject);
+            let items =jsonObject.leaderboard;
+            for (let i =0; i < items.length; i++) {
+              let tableRow = document.createElement("tableRow");
+              let tdPlayer = document.createElement("tableData");
+              let tdScore = document.createElement("tableData");
+              let tdDate = document.createElement("tableData");
+
+              const date = new Date(items[i].completionTime); // convert Unix epoch to JavaScript date object
+              const dateString = date.toLocaleString(); // convert date object to string
+
+              tdPlayer.textContent = items[i].player;
+              tdScore.textContent = items[i].score;
+              tdDate.textContent = dateString;
+
+              tableRow.appendChild(tdPlayer);
+              tableRow.appendChild(tdScore);
+              tableRow.appendChild(tdDate);
+              scoreboardList.appendChild(tableRow);
+            }
+          })
+          .catch(error => console.error(error));
+</script>
+
+</body>
+</html>
