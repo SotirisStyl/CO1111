@@ -92,7 +92,7 @@
 
     function answerQuestion(answer) {
         // Submit answer to API
-        fetch("https://codecyprus.org/th/api/answer?session= " + session + "&answer= + answer")
+        fetch("https://codecyprus.org/th/api/answer?session= " + session + "&answer=" + answer)
             .then(response => response.json())
             .then(jsonObject => {
                 console.log(jsonObject);
