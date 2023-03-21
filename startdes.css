@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    width: 374px;
+    height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+.main {
+    background-size: 600% 600%;
+    background-color: black;
+    height: 955px;
+    padding-top:10px;
+}
+#main {
+    margin-top: 40px;
+    background: black;
+    border: 1px solid ghostwhite;
+    width: 100%;
+    height: 190px;
+    margin-bottom: 20px;
+    border-bottom-right-radius: 43%;
+    border-bottom-left-radius: 43%;
+}
+
+
+label{
+    color: #FFFF00;
+}
+.team {
+    float: left;
+    color: #FFFF00;
+    margin-left: 5px;
+    padding: 5px;
+    border: 1px solid black;
+    background-color: #1F51FF;
+    border-radius: 10px;
+}
+.back {
+    margin-right: 5px;
+    color: #FFFF00;
+    margin-top: 0;
+    float: right;
+    padding: 5px;
+    border: 1px solid black;
+    background-color: #1F51FF;
+    border-radius: 10px;
+}
+#namestart{
+    font-size: 2.0em;
+    color: #1F51FF;
+    margin-left: 8px;
+    text-align: center;
+    margin-top: -400px;
+}
+#start{
+    font-size: 4.0em;
+    color: #1F51FF;
+    margin-top: 20px;
+    margin-left: 85px;
+}
+
+#arrow{
+    width: 90px;
+    height: 150px;
+    margin-left: 140px;
+    margin-top: -20px;
+    margin-bottom: 5px;
+}
+#fname{
+    margin-top: -20px;
+    margin-left: 100px;
+    height: 30px;
+    font-size: 1.5em;
+    width: 170px;
+}
+#myButton{
+    margin-top: 10px;
+    margin-left: 135px;
+    padding: 8px 20px;
+    font-size: 1.5em;
+}

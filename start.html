@@ -2,9 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start.html</title>
+    <link rel="stylesheet" href="startdes.css">
 </head>
 <body>
+<main class="main">
+
+    <a href="challenges.html" class="back">Back</a>
+    <h5 class="team">Team 5</h5>
+    <div class="clearFloat"></div>
+
+    <div id="main">
+        <div class="start"></div>
+    </div>
+    <form>
+        <img id="arrow" src="directory/arrow.png" alt="arrow">
+        <input type="text" id="fname" name="fname" required><br>
+        <input type="button" id="myButton" value="Start" onclick="startTreasureHunt()">
+    </form>
+
+    <p id="namestart">Enter your username to</p>
+    <p id="start">START</p>
+
+    <ul id="challenges"></ul>
+</main>
 
 <script>
     //Read the parameter from the challenge page (treasure hunt id):
@@ -33,7 +55,7 @@
                 sessionStorage.setItem("session", session);
                 let errorMessages = jsonObject.errorMessages;
                 console.log(errorMessages);
-                if (errorMessages && errorMessages[0] === `The specified playerName: ${name}, is already in use (try a different one).`) {
+                if (errorMessages && errorMessages[0] === "The specified playerName: ${name}, is already in use (try a different one).") {
                     alert('This username is already taken. Please select another one.');
                     return 0;
                 } else {
@@ -43,13 +65,6 @@
     }
 </script>
 
-<form>
-    <label for="fname">Username</label><br>
-    <input type="text" id="fname" name="fname" required><br>
-    <input type="button" id="myButton" value="Start" onclick="startTreasureHunt()">
-</form>
-
-<ul id="challenges"></ul>
 
 </body>
 </html>
