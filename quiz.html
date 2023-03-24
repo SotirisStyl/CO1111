@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Treasure Hunt Question</title>
     <link rel="stylesheet" href="quizdes.css">
 </head>
@@ -74,16 +75,22 @@
     const floatForm = document.getElementById("floatForm");
     const floatField = document.getElementById("floatInput");
 
+    const skip = document.getElementById("button");
+
     function getQuestion() {
         // Fetch question from API
         fetch("https://codecyprus.org/th/api/question?session= " + session)
             .then(response => response.json())
             .then(jsonObject => {
                 console.log(jsonObject);
+                if (jsonObject.canBeSkipped) {
+                    skip.style.display = "block";
+                }
+                else {
+                    skip.style.display = "none";
+                }
                 // Display question text
-                const questionDiv = document.getElementById('question');
-                questionDiv.innerHTML = `<p>${jsonObject.questionText}</p>`;
-
+                document.getElementById("question").innerHTML = jsonObject.questionText;
                 // Create answer input based on question type
                 showForm(jsonObject.questionType);
             })
@@ -91,11 +98,13 @@
     }
 
     function answerQuestion(answer) {
+
+        getLocation();
+
         // Submit answer to API
         fetch("https://codecyprus.org/th/api/answer?session= " + session + "&answer=" + answer)
             .then(response => response.json())
             .then(jsonObject => {
-                console.log(jsonObject);
                 // Display result message
                 const resultDiv = document.getElementById('result');
                 alert(jsonObject.message);
@@ -107,30 +116,63 @@
                     getQuestion();
                 } else {
                     location.href = "scoreboard.html";
+                    localStorage.removeItem('points');
                 }
             })
             .catch(error => console.error(error));
+        // Check that the text form and its field exist
+        if (textForm && textField) {
+            textField.value = ""; // Clear the input field
+        }
+        // Check that the text form and its field exist
+        if (integerForm && integerField) {
+            integerField.value = ""; // Clear the input field
+        }
+        // Check that the text form and its field exist
+        if (floatForm && floatField) {
+            floatField.value = ""; // Clear the input field
+        }
     }
 
     function adjustPoints(score) {
         let points = 0;
+        if(localStorage.getItem('points')) {
+            points = Number(localStorage.getItem('points'));
+        }
         points += score;
+        localStorage.setItem('points', String(points));
         const pointsDiv = document.getElementById('points');
-        pointsDiv.innerHTML = `Points: ${points}`;
+        pointsDiv.innerHTML = "Points:" + points;
     }
 
     function nextQuestion() {
-        fetch("https://codecyprus.org/th/api/skip?session= " + session)
-            .then(response => response.json())
-            .then(jsonObject => {
-                console.log(jsonObject);
-                getQuestion();
-                adjustPoints(jsonObject.scoreAdjustment);
-            })
-            .catch(error => console.error(error));
+        if (confirm("Are you sure?")) {
+            fetch("https://codecyprus.org/th/api/skip?session= " + session)
+                .then(response => response.json())
+                .then(jsonObject => {
+                    console.log(jsonObject);
+                    getQuestion();
+                    adjustPoints(jsonObject.scoreAdjustment);
+                })
+                .catch(error => console.error(error));
+        }
     }
 
     getQuestion();
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        }
+        else {
+            alert("Geolocation is not supported by your browser.");
+        }
+    }
+    function showPosition(position) {
+        alert("Latitude: " + position.coords.latitude + ", Longitude: " +
+            position.coords.longitude);
+        // FETCH TO UPDATE LOCATION
+    }
 
     // Helper function to get input type based on question type
     function showForm(questionType) {

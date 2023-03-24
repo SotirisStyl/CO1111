@@ -1,30 +1,305 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Retrieve Treasure Hunts</title>
+    <title>API Test</title>
 </head>
 <body>
-<h1>Treasure Hunts</h1>
-<ul id="treasure-hunts"></ul>
-<script>
-    const apiUrl = "https://codecyprus.org/th/test-api/list";
-    const numberOfTHs = 2; // change this value to request a different number of treasure hunts
-    const treasureHuntsList = document.getElementById("treasure-hunts");
 
-    // make the API call to retrieve treasure hunts
-    fetch(${apiUrl}?number-of-ths=${numberOfTHs})
-        .then(response => response.json())
-        .then(jsonObject => {
-            console.log(jsonObject);
-            let treasureHunts = jsonObject.treasureHunts;
-            for (let i=0; i<treasureHunts.length; i++){
-                let listItem = document.createElement("li");
-                listItem.innerHTML = "<a href=startTest.html?uuid=" + treasureHunts[i].uuid + ">" + treasureHunts[i].name + "</a>";
-                treasureHuntsList.appendChild(listItem);
-            }
-        })
-        .catch(error => console.error(error));
+<h1>Treasure Hunts Example</h1>
+<p id="Enter">Enter the number of Treasure Hunts you want to display and click the button:</p>
+<form id="form">
+    <label for="numberOfTHs">Number of Treasure Hunts:</label>
+    <input type="number" id="numberOfTHs" name="numberOfTHs" required>
+    <br><br>
+    <button type="submit">Get Treasure Hunts</button>
+</form>
+<p id="ths" style="display: none">Treasure Hunts:</p>
+<ul id="treasureHuntsList"></ul>
+<script>
+    const form = document.getElementById("form");
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const numberOfTHs = document.getElementById("numberOfTHs").value;
+
+        const text = document.getElementById("Enter");
+
+        let afterText = document.getElementById("ths");
+
+        let challengesList = document.getElementById("treasureHuntsList");
+
+        let button = document.querySelector("button[type='submit']");
+
+        let url = "https://codecyprus.org/th/test-api/list?number-of-ths=" + numberOfTHs;
+
+        fetch(url)
+            .then(response => response.json()) //Parse JSON text to JavaScript object
+            .then(jsonObject => {
+                console.log(jsonObject);
+                let treasureHunts = jsonObject.treasureHunts;
+                for (let i = 0; i < treasureHunts.length; i++) {
+                    let listItem = document.createElement("li");
+                    listItem.innerHTML = "<a>" + treasureHunts[i].name + "</a>";
+                    challengesList.appendChild(listItem);
+                }
+                afterText.style.display = "block";
+                form.style.display = "none";
+                text.style.display = "none";
+            });
+    });
+</script>
+
+<h1>Start Example</h1>
+<form>
+    <label for="player">Player:</label>
+    <select id="player">
+        <option value="">-- Select Error Type --</option>
+        <option value="INACTIVE">Inactive</option>
+        <option value="EMPTY">Empty</option>
+        <option value="PLAYER">Player</option>
+        <option value="APP">App</option>
+        <option value="UNKNOWN">Unknown</option>
+        <option value="MISSING_PARAMETER">Missing Parameter</option>
+    </select>
+    <button type="button" onclick="startTreasureHunt()">Start Treasure Hunt</button>
+</form>
+<br>
+<p id="response"></p>
+
+<script>
+    function startTreasureHunt() {
+        const url = 'https://codecyprus.org/th/test-api/start';
+        const player = document.getElementById('player').value;
+        const params = player ? {player} : {};
+        const queryString = Object.keys(params).map(key => `${key}=${params[key]}`).join('&');
+
+        fetch(`${url}?${queryString}`)
+            .then(response => response.json())
+            .then(data => {
+                const responseElement = document.getElementById('response');
+                responseElement.innerText = data.errorMessages;
+            })
+            .catch(error => console.error(error));
+    }
+</script>
+
+<h1>Question Example</h1>
+<div id="question"></div>
+
+
+<!-- Update onclick events with correct field references -->
+<div id="forms">
+    <form id="textForm" style="display: none">
+        <input type="text" id="textInput"/>
+        <button type="button" onclick="answerQuestion(textField.value)">Submit Answer</button>
+    </form>
+
+    <form id="integerForm" style="display: none">
+        <input type="number" id="integerInput"/>
+        <button type="button" onclick="answerQuestion(integerField.value)">Submit Answer</button>
+    </form>
+
+    <form id="floatForm" style="display: none">
+        <input type="number" step="0.01" id="floatInput"/>
+        <button type="button" onclick="answerQuestion(floatField.value)">Submit Answer</button>
+    </form>
+
+
+    <form id="booleanForm" style="display: none">
+        <input type="button" value="True" onclick="answerQuestion('True')"/>
+        <input type="button" value="False" onclick="answerQuestion('False')"/>
+    </form>
+
+    <form id="mcqForm" style="display: none">
+        <input type="button" value="A" onclick="answerQuestion('A')"/>
+        <input type="button" value="B" onclick="answerQuestion('B')"/>
+        <input type="button" value="C" onclick="answerQuestion('C')"/>
+        <input type="button" value="D" onclick="answerQuestion('D')"/>
+    </form>
+</div>
+<script>
+    // Get session ID from storage
+    const session = sessionStorage.getItem('session');
+
+    //Text Form:
+    const textForm = document.getElementById("textForm");
+    const textField = document.getElementById("textInput");
+
+    //Boolean form:
+    const booleanForm = document.getElementById("booleanForm");
+
+    //MCQ form:
+    const mcqForm = document.getElementById("mcqForm");
+
+    //Text Form:
+    const integerForm = document.getElementById("integerForm");
+    const integerField = document.getElementById("integerInput");
+
+    //Text Form:
+    const floatForm = document.getElementById("floatForm");
+    const floatField = document.getElementById("floatInput");
+
+    function getQuestion() {
+        // Fetch question from API
+        fetch("https://codecyprus.org/th/test-api/question?")
+            .then(response => response.json())
+            .then(jsonObject => {
+                console.log(jsonObject);
+                // Display question text
+                document.getElementById("question").innerHTML = jsonObject.questionText;
+                // Create answer input based on question type
+                showForm(jsonObject.questionType);
+            })
+            .catch(error => console.error(error));
+    }
+    getQuestion();
+    // Helper function to get input type based on question type
+    function showForm(questionType) {
+        textForm.style.display = "none";
+        floatForm.style.display = "none";
+        integerForm.style.display = "none";
+        booleanForm.style.display = "none";
+        mcqForm.style.display = "none";
+        switch (questionType) {
+            case 'BOOLEAN':
+                booleanForm.style.display = "block";
+                textForm.style.display = "none";
+                floatForm.style.display = "none";
+                integerForm.style.display = "none";
+                mcqForm.style.display = "none";
+                break;
+            case 'INTEGER':
+                integerForm.style.display = "block";
+                textForm.style.display = "none";
+                floatForm.style.display = "none";
+                booleanForm.style.display = "none";
+                mcqForm.style.display = "none";
+                break;
+            case 'NUMERIC':
+                floatForm.style.display = "block";
+                textForm.style.display = "none";
+                integerForm.style.display = "none";
+                booleanForm.style.display = "none";
+                mcqForm.style.display = "none";
+                break;
+            case 'MCQ':
+                mcqForm.style.display = "block";
+                textForm.style.display = "none";
+                floatForm.style.display = "none";
+                integerForm.style.display = "none";
+                booleanForm.style.display = "none";
+                break;
+            case 'TEXT':
+                textForm.style.display = "block";
+                floatForm.style.display = "none";
+                integerForm.style.display = "none";
+                booleanForm.style.display = "none";
+                mcqForm.style.display = "none";
+                break;
+        }
+    }
+</script>
+
+
+<h1>Answer Example</h1>
+<form id="answer-form">
+    <label>
+        Correct:
+        <input type="checkbox" name="correct">
+    </label>
+    <label>
+        Completed:
+        <input type="checkbox" name="completed">
+    </label>
+    <button type="submit">Submit</button>
+</form>
+<div id="result"></div>
+<script>
+    const form = document.getElementById('answer-form');
+    const res = document.getElementById('result');
+
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const url = 'https://codecyprus.org/th/test-api/answer';
+        const params = new URLSearchParams(new FormData(form));
+        try {
+            const response = await fetch(`${url}?${params}`);
+            const data = await response.json();
+            res.textContent = JSON.stringify(data);
+        } catch (error) {
+            res.textContent = error.message;
+        }
+    });
+</script>
+
+
+<h1>Score Example</h1>
+<p id="mytitle">Click the button to get the score:</p>
+<button onclick="getScore()" id="mybutton">Get Score</button>
+<p id="score"></p>
+<script>
+    let title = document.getElementById("mytitle");
+    let button = document.getElementById("mybutton");
+
+    function getScore() {
+        const url = "https://codecyprus.org/th/test-api/score?score=42";
+        fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                const responseElement = document.getElementById('score');
+                responseElement.innerText = "Score: " + data.score;
+                title.style.display = "none";
+                button.style.display = "none";
+            });
+    }
+</script>
+
+<h1>Leaderboard</h1>
+<label for="sorted">Sort by score:</label>
+<input type="checkbox" id="sorted" name="sorted">
+<label for="prize">Has prize:</label>
+<input type="checkbox" id="prize" name="prize">
+<button onclick="getLeaderboard()">Get Leaderboard</button>
+
+<table id="leaderboard">
+    <tr>
+        <th id="Rank">Rank</th>
+        <th id="Players">Player</th>
+        <th id="Scores">Score</th>
+    </tr>
+</table>
+
+<script>
+    let rank = document.getElementById("Rank");
+    let player = document.getElementById("Players");
+    let score = document.getElementById("Scores");
+
+    function getLeaderboard() {
+        const sorted = document.getElementById('sorted').checked;
+        const hasPrize = document.getElementById('prize').checked;
+        const size = 42;
+        let url = `https://codecyprus.org/th/test-api/leaderboard?size=${size}`;
+        if (sorted) {
+            url += '&sorted';
+        }
+        if (hasPrize) {
+            url += '&hasPrize';
+        }
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                let leaderboard = data.leaderboard;
+                player.innerText += "\r";
+                score.innerText += "\r";
+                rank.innerText += "\r"
+                for (let i = 0; i < leaderboard.length; i++) {
+                    rank.innerText += i + 1 + "\r";
+                    player.innerText += leaderboard[i].player + "\r";
+                    score.innerText += leaderboard[i].score + "\r";
+                }
+            })
+            .catch(error => console.error(error));
+    }
 </script>
 </body>
 </html>

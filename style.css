@@ -15,8 +15,18 @@ body {
 .team {
     float: left;
     color:#FFFF00;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-left: 10px;
+    padding: 5px;
+    border: 1px solid black;
+    background-color: #1F51FF;
+    border-radius: 10px;
+}
+#test{
+    position: relative;
+    top:-35px;
+    margin-left: 321px;
+    color: #FFFF00;
     padding: 5px;
     border: 1px solid black;
     background-color: #1F51FF;
@@ -25,7 +35,7 @@ body {
 
 .notes{
     position: relative;
-    top:-23px;
+    top:-20px;
     margin-left: 315px;
     color: #FFFF00;
     padding: 5px;
